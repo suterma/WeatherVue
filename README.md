@@ -1,11 +1,11 @@
 # WeatherVue
  A simple, Raspberry Pi based weather station, that posts to a Vue.js app via MQTT. 
  
-The publish part is based on my other repository [WeatherPress](https://github.com/suterma/WeatherPress), which is described in detail in the corresponding [blog post](https://qrys.ch/a-raspberry-pi-based-weather-station-posting-to-wordpress/).
+The **publish** part is based on my other repository [WeatherPress](https://github.com/suterma/WeatherPress), which is described in detail in the corresponding [blog post](https://qrys.ch/a-raspberry-pi-based-weather-station-posting-to-wordpress/). The main difference is that the data is posted to a MQTT broker instead of a WordPress site.
 
 The subscribe and display part is done entirely in Vue.js, as a learning project.
 
-#//TODO 
+#//TODO Describe subscribe part.
  
 # Credits
  - [Vue.js](https://vuejs.org/): A Javascript framework, based on the MVVM principles (MIT License)
