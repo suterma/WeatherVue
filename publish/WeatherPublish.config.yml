@@ -1,0 +1,13 @@
+# Credentials for accessing the MQTT broker
+MqttBroker:
+    # The topic to publish to
+    # The last sub-topic name serves as a display category
+    topic: testtopic/weathevue/nw/estrich
+    # The broker host name to sent the message to
+    host: broker.mqttdashboard.com
+    # The username to publish as (leave empty if not required)
+    # currently not supported
+    # username: someuser
+    # The password to the account (leave empty if not required)
+    # currently not supported
+    # password: monkey123
