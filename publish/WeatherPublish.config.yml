@@ -2,7 +2,7 @@
 MqttBroker:
     # The topic to publish to
     # The last sub-topic name serves as a display category
-    topic: testtopic/weathevue/nw/estrich
+    topic: testtopic/weathervue/location
     # The broker host name to sent the message to
     host: broker.mqttdashboard.com
     # The username to publish as (leave empty if not required)

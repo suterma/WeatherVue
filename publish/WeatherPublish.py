@@ -26,8 +26,8 @@ pi.stop()
 # Post the data to an MQTT topic
 import paho.mqtt.publish as publish
 
-textHumidity = "Relative Humidity is : %.3f %%rH" %humidity
-textTemperature = "Temperature in Celsius is : %.3f °C" %temperature
+textHumidity = "%.3f %%rH" %humidity
+textTemperature = "%.3f °C" %temperature
 
 print('preparing message publication...')
 
