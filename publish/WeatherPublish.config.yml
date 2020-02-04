@@ -1,4 +1,6 @@
 # Credentials for accessing the MQTT broker
+# For the given example below, you can use the Javascript Web Socket Client at 
+# http://www.hivemq.com/demos/websocket-client/
 MqttBroker:
     # The topic to publish to
     # The last sub-topic name serves as a display category
