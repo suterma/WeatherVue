@@ -10,7 +10,7 @@ Via configuration, the output can either be a text or a simple JSON object.
 
 Example for Text: `21.408 °C 45.342 %rH`
 
-Example for JSON:
+Example for JSON (minus comments):
 ~~~~
 {
   "measurement": {
