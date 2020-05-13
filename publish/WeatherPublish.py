@@ -44,7 +44,7 @@ textTemperature = "%.3f °C" %temperature
 data = textTemperature + ' ' + textHumidity
 
 # output json on request
-if (output = 'json')
+if (output = 'json'):
     data = '{  "measurement": {    "timestamp": ' + int(round(time.time() * 1000))+ ',    "temperature": ' + temperature + ',    "relhumidity": ' + humidity + '  } }'
 
 print('publishing...')
