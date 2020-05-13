@@ -39,13 +39,13 @@ output = config['MqttBroker']['output'];
 # currently not supported password = config['MqttBroker']['password'];
 
 # text is default output
-textHumidity = "%.3f %%rH" %humidity
-textTemperature = "%.3f °C" %temperature
+textHumidity = "%.2f %%rH" %humidity
+textTemperature = "%.2f °C" %temperature
 data = textTemperature + ' ' + textHumidity
 
 # output json on request
 if (output == 'json'):
-    data = '{  "measurement": {    "timestamp": ' + str(round(time.time() * 1000))+ ',    "temperature": ' + str(temperature) + ',    "relhumidity": ' + str(humidity) + '  } }'
+    data = '{  "measurement": {    "timestamp": ' + str(round(time.time() * 1000))+ ', "temperature": {0:.2f}, "relhumidity": {1:.2f}'.format(temperature, humidity) + ' } } '
 
 print('publishing...')
 
