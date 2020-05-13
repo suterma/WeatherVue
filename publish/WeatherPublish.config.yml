@@ -13,3 +13,5 @@ MqttBroker:
     # The password to the account (leave empty if not required)
     # currently not supported
     # password: monkey123
+    # The output format (currently 'text' and 'json' are supported)
+    output: json
