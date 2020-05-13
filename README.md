@@ -14,12 +14,9 @@ Example for JSON:
 ~~~~
 {
   "measurement": {
-    # milliseconds since unix epoch
-    "timestamp": 1589399663000,
-    # a temperature value in degrees celsius
-    "temperature": 22.3,
-    # a humidity value in % rel. Humidity
-    "relhumidity": 45.3
+    "timestamp": 1589399663000,    // milliseconds since unix epoch
+    "temperature": 22.3,    // a temperature value in degrees celsius
+    "relhumidity": 45.3     // a humidity value in % rel. Humidity
   }
 }
 ~~~~
