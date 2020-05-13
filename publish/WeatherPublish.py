@@ -26,9 +26,6 @@ pi.stop()
 # Post the data to an MQTT topic
 import paho.mqtt.publish as publish
 
-textHumidity = "%.3f %%rH" %humidity
-textTemperature = "%.3f °C" %temperature
-
 print('preparing message publication...')
 
 import yaml
@@ -37,10 +34,18 @@ with open("WeatherPublish.config.yml", "r") as configFile:
 
 topic = config['MqttBroker']['topic'];
 host = config['MqttBroker']['host'];
+output = config['MqttBroker']['output'];
 # currently not supported username = config['MqttBroker']['username'];
 # currently not supported password = config['MqttBroker']['password'];
+
+# text is default output
+textHumidity = "%.3f %%rH" %humidity
+textTemperature = "%.3f °C" %temperature
 data = textTemperature + ' ' + textHumidity
 
+# output json on request
+if (output = 'json')
+    data = '{  "measurement": {    "timestamp": ' + int(round(time.time() * 1000))+ ',    "temperature": ' + temperature + ',    "relhumidity": ' + humidity + '  } }'
 
 print('publishing...')
 
