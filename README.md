@@ -14,14 +14,17 @@ Example for JSON:
 ~~~~
 {
   "measurement": {
+    # milliseconds since unix epoch
     "timestamp": 1589399663000,
+    # a temperature value in degrees celsius
     "temperature": 22.3,
+    # a humidity value in % rel. Humidity
     "relhumidity": 45.3
   }
 }
 ~~~~
 
-## Subscript and Display
+## Subscribe and Display
 
 The subscribe and display part is done entirely in Vue.js, as a learning project. (Not yet implemented)
 
