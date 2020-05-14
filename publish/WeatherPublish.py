@@ -45,7 +45,7 @@ data = textTemperature + ' ' + textHumidity
 
 # output json on request
 if (output == 'json'):
-    data = '{  "measurement": {    "timestamp": ' + str(round(time.time() * 1000))+ ', "temperature": {0:.2f}, "relhumidity": {1:.2f}'.format(temperature, humidity) + ' } } '
+    data = '{  "measurement": {    "timestamp": ' + str(round(time.time() * 1000))+ ', "temperature": {0:.1f}, "relhumidity": {1:.1f}'.format(temperature, humidity) + ' } } '
 
 print('publishing...')
 
