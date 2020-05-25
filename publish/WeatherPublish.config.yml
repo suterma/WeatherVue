@@ -6,7 +6,7 @@ MqttBroker:
     # The last sub-topic name serves as a display category
     topic: testtopic/weathervue/location
     # The broker host name to sent the message to
-    host: broker.mqttdashboard.com
+    host: test.mosquitto.org
     # The username to publish as (leave empty if not required)
     # currently not supported
     # username: someuser
