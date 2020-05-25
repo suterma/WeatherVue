@@ -23,10 +23,12 @@ Example for JSON (minus comments):
 
 ## Subscribe and Display
 
-The subscribe and display part is done entirely in Vue.js, as a learning project. (Not yet implemented)
+The subscribe and display part is done, at least partially, in Vue.js, as a learning project. You can statically serve it from any web server. A live instance is available at https://weathervue.qrys.ch.
 
 # Credits
  - [Vue.js](https://vuejs.org/): A Javascript framework, based on the MVVM principles (MIT License)
  - [Paho Python Client](https://github.com/eclipse/paho.mqtt.python), a MQTT Python Client (dual Eclipse License)
- - [Vue-Mqtt](https://github.com/nik-zp/vue-mqtt), an MQTT client for Vuejs2 (No License)
+ - [mqtt.js](https://github.com/mqttjs/MQTT.js), an MQTT client in JavaScript (MIT License)
+ - [Eclipse Mosquitto](https://mosquitto.org/), a free and open source MQTT broker
+ - [Full screen clock](https://www.nayuki.io/page/full-screen-clock-javascript), a Full screen clock in JavaScript (no license specified)
  - Additionally: See [WeatherPress](https://github.com/suterma/WeatherPress) (GPLv3 License)
