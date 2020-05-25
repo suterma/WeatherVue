@@ -23,7 +23,7 @@ Example for JSON (minus comments):
 
 ## Subscribe and Display
 
-The subscribe and display part is done, at least partially, in Vue.js, as a learning project.
+The subscribe and display part is done, at least partially, in Vue.js, as a learning project. You can statically serve it from any web server. A live instance is available at https://weathervue.qrys.ch.
 
 # Credits
  - [Vue.js](https://vuejs.org/): A Javascript framework, based on the MVVM principles (MIT License)
