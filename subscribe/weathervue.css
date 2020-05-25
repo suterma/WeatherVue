@@ -1,0 +1,62 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+}
+
+#weatherdisplay{
+  width: 100%;
+  align-content: center;
+}
+
+.tile {
+  border-radius: 0.5em;
+  padding: 1%;
+  margin: 1%;
+  float: left;
+  align-content: center;
+
+  /*full*/
+  width: 96%;
+  min-width: 96%;
+  
+  /*undefined type*/
+  background-color: rgba(51, 51, 51, .7)    /* opaque grey */
+}
+
+.tile-quarter {
+  width: 21%;
+  min-width: 21%;
+}
+
+.tile-half {
+  width: 46%;
+  min-width: 46%;
+}
+
+.tile>.annotation {
+  /*The annotation should be smaller than the value*/
+  width: 40%;
+  max-width: 40%;
+  font-weight: lighter;
+}
+
+
+.tile.value {
+  /*width: 100%;*/
+    font-kerning: none;
+    font-family: monospace;
+}
+
+.tile.temperature {
+  background-color: rgba(170, 51, 51, .7)    /* opaque red */
+}
+
+.tile.humidity {
+  background-color: rgba(51, 51, 170, .7)    /* opaque blue */
+}
+
+.clock {
+  color: white;
+  font-kerning: none;
+}

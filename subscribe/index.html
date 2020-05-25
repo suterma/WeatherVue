@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>WeatherVue</title>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- mqtt.js non-minified version-->
+  <script src="https://unpkg.com/mqtt/dist/mqtt.js"></script>
+  <!-- fittext, lets text fill a space -->
+  <script src="fittext.js"></script>
+  <link rel="stylesheet" href="weathervue.css">
+</head>
+<body>
+  <div id="app">
+    <div id="weatherdisplay">
+      <tile annotation="Homeoffice" size="half" v-bind:value="homeofficeTemperature" type="temperature"></tile>
+      <tile annotation="Homeoffice" size="half" v-bind:value="homeofficeRelhumidity" type="humidity"></tile>
+      <tile annotation="Attic" size="quarter" v-bind:value="atticTemperature" type="temperature"></tile>
+      <tile annotation="Attic" size="quarter" v-bind:value="atticRelhumidity" type="humidity"></tile>
+      <tile annotation="Outdoor" size="quarter" v-bind:value="outdoorTemperature" type="temperature"></tile>
+      <tile annotation="Outdoor" size="quarter" v-bind:value="outdoorRelhumidity" type="humidity"></tile>
+      <tile annotation="2nd floor" size="quarter" v-bind:value="legoboxTemperature" type="temperature"></tile>
+      <tile annotation="2nd floor" size="quarter" v-bind:value="legoboxRelhumidity" type="humidity"></tile>
+    </div>
+  </div>
+
+  <script>
+    // Define a data tile component
+    // annotation: free text
+    // size: one of 'full', 'half', 'quarter'
+    // type: one of 'humidity', 'temperature', 'undefined'
+    // value: an arbitrary value
+    Vue.component('tile', {
+      props: ['annotation', 'size', 'type', 'value'],
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      computed: {
+        cssClass: function () {
+          // `this` points to the vm instance
+          // compile the css class from the relevant properties
+          return "tile " + "tile-"+ this.size + " " + this.type;
+        },
+        unit: function() {
+          if (this.type==='temperature'){
+            return "°C"; // ℃ degrees celsius
+          }
+          if (this.type==='humidity'){
+            return "%"; // percent (rel. H)
+          }
+          return "";
+        }
+      },
+      methods: {
+        /*
+        ingest: function (topic, payload) {
+          // `this` inside methods point to the Vue instance
+          var data = JSON.parse(payload);
+          this.temperature = data.measurement.temperature;
+          this.relhumidity = data.measurement.relhumidity;
+        },*/
+      },      
+      template: '<div :class="cssClass"><div class="annotation fittext">{{annotation}}</div><div class="value fittext" id="humidityvalue">{{value}} {{unit}}</div></div>'
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        homeofficeTemperature: '___._',
+        homeofficeRelhumidity: '___._',
+        atticTemperature: '___._',
+        atticRelhumidity: '___._',
+        legoboxTemperature: '___._',
+        legoboxRelhumidity: '___._',
+        outdoorTemperature: '___._',
+        outdoorRelhumidity: '___._',    
+      },
+      mounted: function () {
+        //fit the text
+        var x = document.getElementsByClassName("fittext");
+        var i;
+        for (i = 0; i < x.length; i++) {
+          window.fitText( x[i] , 0.4);
+        }
+        console.log('fitted');
+      },
+      methods: {
+        ingest: function (topic, payload) {
+          // `this` inside methods point to the Vue instance
+          console.log('ingesting for topic: ');
+          var data = JSON.parse(payload);
+          if (topic === 'testtopic/weathervue/homeoffice')
+          {
+            this.homeofficeTemperature = data.measurement.temperature;
+            this.homeofficeRelhumidity = data.measurement.relhumidity;
+          }
+          if (topic === 'testtopic/weathervue/attic')
+          {
+            this.atticTemperature = data.measurement.temperature;
+            this.atticRelhumidity = data.measurement.relhumidity;
+          }
+          if (topic === 'testtopic/weathervue/legobox')
+          {
+            this.legoboxTemperature = data.measurement.temperature;
+            this.legoboxRelhumidity = data.measurement.relhumidity;
+          }
+          if (topic === 'testtopic/weathervue/outdoor')
+          {
+            this.outdoorTemperature = data.measurement.temperature;
+            this.outdoorRelhumidity = data.measurement.relhumidity;
+          }
+        },
+      }
+    })
+  </script>
+
+  <!-- Loading data via MQTT -->
+  <script>
+    // Note: Browsers typically only can use web sockets, not TCP sockets
+    var hostUrl = 'wss://test.mosquitto.org:8081'; //web sockets over TLS
+    var client = mqtt.connect(hostUrl);
+
+    var topic = 'testtopic/weathervue/homeoffice'
+    client.subscribe(topic);
+    console.log("Subscribed to topic '"+topic +"' at host '" + hostUrl + "'");
+    var topic = 'testtopic/weathervue/attic'
+    client.subscribe(topic);
+    console.log("Subscribed to topic '"+topic +"' at host '" + hostUrl + "'");
+    var topic = 'testtopic/weathervue/legobox'
+    client.subscribe(topic);
+    console.log("Subscribed to topic '"+topic +"' at host '" + hostUrl + "'");
+    var topic = 'testtopic/weathervue/outdoor'
+    client.subscribe(topic);
+    console.log("Subscribed to topic '"+topic +"' at host '" + hostUrl + "'");
+
+    client.on("message", function (topic, payload) {
+      app.ingest(topic, payload);
+    })
+
+    window.onbeforeunload = function(){
+      client.end()
+      console.log('Ended the mqtt client.');
+    }
+  </script>
+
+  <div>
+    <!--Clock part (Copyright (c) 2020 Project Nayuki, https://www.nayuki.io/page/full-screen-clock-javascript) -->
+    <span id="clocktext" class="clock"></span>
+    <script>
+			"use strict";
+
+			var textElem = document.getElementById("clocktext");
+			var targetWidth = 1.0;  // Proportion of full screen width
+			var curFontSize = 20;  // Do not change
+
+			function updateClock() {
+				var d = new Date();
+				var s = "";
+				s += (10 > d.getHours  () ? "0" : "") + d.getHours  () + ":";
+				s += (10 > d.getMinutes() ? "0" : "") + d.getMinutes() + ":";
+				s += (10 > d.getSeconds() ? "0" : "") + d.getSeconds();
+				textElem.textContent = s;
+				setTimeout(updateClock, 1000 - d.getTime() % 1000 + 20);
+			}
+
+			function updateTextSize() {
+				for (var i = 0; 3 > i; i++) {  // Iterate for better better convergence
+					curFontSize *= targetWidth / (textElem.offsetWidth / textElem.parentNode.offsetWidth);
+					textElem.style.fontSize = curFontSize + "pt";
+				}
+			}
+
+			updateClock();
+			updateTextSize();
+			window.addEventListener("resize", updateTextSize);
+		</script>
+  </div>
+</body>
+</html>
