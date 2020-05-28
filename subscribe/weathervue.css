@@ -16,12 +16,19 @@ body {
   float: left;
   align-content: center;
 
-  /*full*/
-  width: 96%;
-  min-width: 96%;
-  
   /*undefined type*/
   background-color: rgba(51, 51, 51, .7)    /* opaque grey */
+}
+
+/* Vertical Display: Full uses Full widht of screen */
+.tile-full {
+  width: 96%;
+  min-width: 96%;
+}
+
+.tile-half {
+  width: 46%;
+  min-width: 46%;
 }
 
 .tile-quarter {
@@ -29,9 +36,22 @@ body {
   min-width: 21%;
 }
 
-.tile-half {
-  width: 46%;
-  min-width: 46%;
+/* Horizontal Display: Full uses only half of the widht of screen, to more efficiently use the space */
+@media (min-aspect-ratio: 4/3) { 
+  .tile-full {
+    width: 46%;
+    min-width: 46%;
+	}
+  
+  .tile-half {
+    width: 21%;
+    min-width: 21%;
+  }
+  
+  .tile-quarter {
+    width: 8.5%;
+    min-width: 8.5%;
+  }
 }
 
 .tile>.annotation {
