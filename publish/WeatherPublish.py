@@ -51,7 +51,7 @@ print('publishing...')
 
 # post to an application specific topic, with the location as a subtopic
 # The payload contains the data
-publish.single(topic, payload=data, hostname=host);
+publish.single(topic, payload=data, qos=0, retain=True, hostname=host);
 
 # Report success
 print(data + ' publicly published to ' + topic + '@' + host)
