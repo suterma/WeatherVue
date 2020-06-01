@@ -1,4 +1,4 @@
-# WeatherPress.py - A simple, Raspberry Pi based weather station, that posts
+# WeatherVue - A simple, Raspberry Pi based weather station, that posts
 # to an MQTT topic.
 # ------------------------------------------------------------------------------
 
